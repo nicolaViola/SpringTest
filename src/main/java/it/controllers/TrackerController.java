@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TrackerController {
 	
-//  http://localhost:8080/SpringTest/welcome
+//  http://localhost:8081/SpringTest/noAuthorization
+	@RequestMapping(value = "/noAuthorization", method = RequestMethod.GET)
+	public void noAuthorization(Model model) {
+		System.out.println("noAuthorization!");
+	}
+	
+//  http://localhost:8081/SpringTest/welcome
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public void welcome(Model model) {
-		System.out.println("Entro nel Controller!");
+		System.out.println("Entro nel sistema!");
 	}
 
 }

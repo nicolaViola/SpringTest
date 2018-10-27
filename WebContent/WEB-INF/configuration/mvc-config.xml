@@ -21,9 +21,9 @@
         
         <context:component-scan base-package="it" />
         
-        <!-- <bean class = "org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/> -->
+        <!-- <bean class = "org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>  -->
        <!--  <bean id="xmlController" class="it.cer.controller.XmlController" /> -->
-		
+		<bean id ="passwordEncoder" class = "org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method = "getInstance" />
         
         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 			<property name="prefix" value="/WEB-INF/jsp/"/>
