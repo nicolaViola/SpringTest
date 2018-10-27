@@ -19,5 +19,11 @@ public class TrackerController {
 	public void welcome(Model model) {
 		System.out.println("Entro nel sistema!");
 	}
+	
+//  http://localhost:8081/SpringTest/welcome
+	@RequestMapping(value = "/doSomething", method = RequestMethod.GET)
+	public void doSomething(Model model) {
+		System.out.println("doSomething!");
+	}
 
 }
