@@ -7,8 +7,9 @@ http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 <http auto-config="true" use-expressions="true">
+	<access-denied-handler error-page="/noAuthorization.jsp"/>
 	<intercept-url pattern="/*" access="hasRole('ROLE_ADMIN')"/>
-	<form-login authentication-failure-forward-url="/noAuthorization.jsp" always-use-default-target="true" default-target-url="/welcome" /> 
+	<form-login  authentication-failure-forward-url="/noAuthorization.jsp" always-use-default-target="true" default-target-url="/welcome" /> 
 </http>
 
 <beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
