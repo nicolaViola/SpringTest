@@ -14,12 +14,16 @@
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
         
+        <import resource="db-config.xml"/>
+        
         <mvc:annotation-driven /> 
         
         <mvc:default-servlet-handler/> 
         
         
         <context:component-scan base-package="it" />
+        
+        
         
         <!-- <bean class = "org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>  -->
        <!--  <bean id="xmlController" class="it.cer.controller.XmlController" /> -->
