@@ -13,6 +13,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 </http>
 
 <beans:bean name="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
 <authentication-manager>
 	<authentication-provider>
 		<password-encoder ref="bcryptEncoder" />
