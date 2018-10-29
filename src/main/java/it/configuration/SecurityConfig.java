@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	private DataSource dataSource2;
+	private DataSource dataSource;
 
 	//Intercettare una requesr
 	@Override
@@ -28,14 +28,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	http
 	.authorizeRequests()
 	.antMatchers("/*").hasAnyRole("ROLE_USER", "ROLE_ADMIN")
-	.and().formLogin().failureForwardUrl("/noAuthorization.jsp").defaultSuccessUrl("/welcome")
-	.and().exceptionHandling().accessDeniedPage("/accessDenied.jsp");
+	.and()
+		.formLogin().failureForwardUrl("/noAuthorization.jsp").defaultSuccessUrl("/welcome")
+			.and().exceptionHandling().accessDeniedPage("/accessDenied.jsp");
 	}
 	
 	//Autenticazione contro un datasource
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource2).passwordEncoder(passwordEncoder());
+		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
 	}
 	
 	

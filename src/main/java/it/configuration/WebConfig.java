@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"it"})
-@ImportResource("/WEB-INF/configuration/db-config.xml")
+//@ImportResource("/WEB-INF/configuration/db-config.xml")
 public class WebConfig implements WebMvcConfigurer{
 	
 	
@@ -31,7 +32,14 @@ public class WebConfig implements WebMvcConfigurer{
 	}
 	
 	@Bean
-	public DataSource dataSource2() {
+	public DataSource dataSource() {
+		
+//		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//		String p = bCryptPasswordEncoder.encode("admin");
+//		System.out.println(bCryptPasswordEncoder.matches("admin", p));
+//		System.out.println(p);
+		
+		
 		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
 		EmbeddedDatabase db = builder
 			.setType(EmbeddedDatabaseType.H2) //.H2 or .DERBY
