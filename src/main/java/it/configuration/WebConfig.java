@@ -30,15 +30,15 @@ public class WebConfig implements WebMvcConfigurer{
 		return resolver;
 	}
 	
-//	@Bean
-//	public DataSource dataSource() {
-//		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-//		EmbeddedDatabase db = builder
-//			.setType(EmbeddedDatabaseType.H2) //.H2 or .DERBY
-//			.addScript("classpath:WEB-INF/configuration/db/schema.sql")
-//			.addScript("classpath:WEB-INF/configuration/db/test-data.sql")
-//			.build();
-//		return db;
-//	}
+	@Bean
+	public DataSource dataSource2() {
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		EmbeddedDatabase db = builder
+			.setType(EmbeddedDatabaseType.H2) //.H2 or .DERBY
+			.addScript("classpath:db/schema.sql")
+			.addScript("classpath:db/test-data.sql")
+			.build();
+		return db;
+	}
 
 }

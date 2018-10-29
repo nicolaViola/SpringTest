@@ -20,7 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	private DataSource dataSource;
+	private DataSource dataSource2;
 
 	//Intercettare una requesr
 	@Override
@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	//Autenticazione contro un datasource
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
+		auth.jdbcAuthentication().dataSource(dataSource2).passwordEncoder(passwordEncoder());
 	}
 	
 	
