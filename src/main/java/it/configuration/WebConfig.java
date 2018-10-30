@@ -5,11 +5,10 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -20,7 +19,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages = {"it"})
 //@ImportResource("/WEB-INF/configuration/db-config.xml")
 public class WebConfig implements WebMvcConfigurer{
-	
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
 	
 	@Bean
 	InternalResourceViewResolver getViewResolver(){	
@@ -31,22 +33,6 @@ public class WebConfig implements WebMvcConfigurer{
 		return resolver;
 	}
 	
-	@Bean
-	public DataSource dataSource() {
-		
-//		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-//		String p = bCryptPasswordEncoder.encode("admin");
-//		System.out.println(bCryptPasswordEncoder.matches("admin", p));
-//		System.out.println(p);
-		
-		
-		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-		EmbeddedDatabase db = builder
-			.setType(EmbeddedDatabaseType.H2) //.H2 or .DERBY
-			.addScript("classpath:db/schema.sql")
-			.addScript("classpath:db/test-data.sql")
-			.build();
-		return db;
-	}
+	
 
 }

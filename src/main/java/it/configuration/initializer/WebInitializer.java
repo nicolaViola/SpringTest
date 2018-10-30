@@ -2,6 +2,7 @@ package it.configuration.initializer;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import it.configuration.RootConfig;
 import it.configuration.WebConfig;
 
 public class WebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer{
@@ -9,7 +10,7 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
 		// TODO Auto-generated method stub
-		return null;
+		return null;//new Class<?>[]{ RootConfig.class };
 	}
 
 	@Override
@@ -19,7 +20,8 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 
 	@Override
 	protected String[] getServletMappings() {
-		return new String[] { "/SpringTest" };
+		return new String[] { "/" };
 	}
 
+	
 }
