@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -32,7 +34,30 @@ public class WebConfig implements WebMvcConfigurer{
 		resolver.setRequestContextAttribute("requestContext");
 		return resolver;
 	}
+
+
+	@Bean
+	public DataSource dataSource() {
+		
+//		PasswordEncoder bCryptPasswordEncoder = passwordEncoder();
+//		//String p = bCryptPasswordEncoder.encode("admin");
+//		System.out.println(bCryptPasswordEncoder.matches("admin", "$2a$08$YN2y9ehNoknkvyPn5iVNEeb8qnCO5VDKs7FkmoM8hQjt2IZh/ACza"));
+//		//System.out.println(p);
+		
+		
+		EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+		EmbeddedDatabase db = builder
+			.setType(EmbeddedDatabaseType.H2) //.H2 or .DERBY
+			.addScripts("classpath:db/schema.sql", 
+						"classpath:db/test-data.sql")
+			.build();
+		return db;
+	}
 	
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder(10);
+	}
 	
 
 }
