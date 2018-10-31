@@ -15,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -30,14 +32,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+		
 		.authorizeRequests()
+		.antMatchers("/myLogin").anonymous()
 			.antMatchers("/*").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER") //oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
+			
+//			.usernameParameter("username") 
+//			.passwordParameter("password") 
+//			.loginProcessingUrl("/login")
+//		    .loginPage("/myLogin")
+//		    .loginProcessingUrl("/perform_login")
+		    
 			.failureForwardUrl("/noAuthorization.jsp")
 			.successHandler(simpleUrlAuthenticationSuccessHandler())
 		.and()
 			.exceptionHandling().accessDeniedPage("/accessDenied.jsp");
+//		.and()
+//			.logout()
+//			.logoutSuccessHandler(logoutSuccessHandler())
+//			.logoutSuccessUrl("/");
 	}
 	
 	//Autenticazione contro un datasource
@@ -51,6 +66,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	public AuthenticationSuccessHandler simpleUrlAuthenticationSuccessHandler(){
 		return new SimpleUrlAuthenticationSuccessHandler("/welcome");
 	}
+	
+//	@Bean
+//	public LogoutSuccessHandler logoutSuccessHandler(){
+//		return new SimpleUrlLogoutSuccessHandler();
+//	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
