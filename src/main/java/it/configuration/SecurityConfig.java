@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //					.antMatchers("/welcome")
 //				.requiresSecure();
 		
-	//	http.csrf().disable();
+	//	http.csrf().disable(); //default il csrf è abilitato server side
 	}
 	
 	@Bean
