@@ -7,7 +7,7 @@
          <tr>
             <td>User:</td>
             <td><input type='text' name='username' value=''></td>
-         </tr>
+         </tr> 
          <tr>
             <td>Password:</td>
             <td><input type='password' name='password' /></td>

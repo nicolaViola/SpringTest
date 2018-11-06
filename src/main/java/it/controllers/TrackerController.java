@@ -32,9 +32,6 @@ public class TrackerController {
 	}
 	
 	
-//	@RequestMapping(value = "/myLogin", method = RequestMethod.GET)
-//	public void myLogin(Model model) {
-//		System.out.println("myLogin!");
-//	}
+
 
 }

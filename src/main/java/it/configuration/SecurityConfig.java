@@ -24,26 +24,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private DataSource dataSource;
 	
-	@Autowired
-	private PasswordEncoder encoder;
+//	@Autowired
+//	private PasswordEncoder encoder;
 
 	//Intercettare una requesr
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
-		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER') and hasIpAddress('127.0.0.1')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
+		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
 				.loginPage("/myLogin").permitAll()
 					.failureForwardUrl("/noAuthorization.jsp")
 					.successHandler(simpleUrlAuthenticationSuccessHandler())
 				.and()
-					.exceptionHandling().accessDeniedPage("/accessDenied.jsp")
-			.and()
-				.requiresChannel()
-					.antMatchers("/welcome")
-				.requiresSecure();
+					.exceptionHandling().accessDeniedPage("/accessDenied.jsp");
+//			.and()
+//				.requiresChannel()
+//					.antMatchers("/welcome")
+//				.requiresSecure();
 		
 		http.csrf().disable();
 	}
