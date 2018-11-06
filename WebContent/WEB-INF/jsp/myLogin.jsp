@@ -1,8 +1,8 @@
 <html>
 <head></head>
 <body>
-   <h1>MyLogin</h1>
-   <form name='f' action="login" method='POST'>
+   <h1>MIA Login</h1>
+   <form name='f' action="/SpringTest/myLogin" method='POST'>
       <table>
          <tr>
             <td>User:</td>

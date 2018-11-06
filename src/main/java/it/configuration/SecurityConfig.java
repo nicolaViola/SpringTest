@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER') and hasIpAddress('127.0.0.1')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
+				.loginPage("/myLogin").permitAll()
 					.failureForwardUrl("/noAuthorization.jsp")
 					.successHandler(simpleUrlAuthenticationSuccessHandler())
 				.and()
@@ -44,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.antMatchers("/welcome")
 				.requiresSecure();
 		
-		//http.csrf().disable();
+		http.csrf().disable();
 	}
 	
 	//Autenticazione contro un datasource
