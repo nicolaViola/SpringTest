@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-accessDenied STATICx
+xsecure
 </body>
 </html>

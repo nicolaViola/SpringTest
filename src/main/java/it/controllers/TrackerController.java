@@ -26,9 +26,9 @@ public class TrackerController {
 		System.out.println("doSomething!");
 	}
 	
-//	@RequestMapping(value = "/myLogin", method = RequestMethod.GET)
-//	public void myLogin(Model model) {
-//		System.out.println("myLogin!");
-//	}
+	@RequestMapping(value = "/xsecure", method = RequestMethod.GET)
+	public void xsecure(Model model) {
+		System.out.println("xsecure!");
+	}
 
 }

@@ -15,11 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
-import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
+//@EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -34,8 +33,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 		
 		.authorizeRequests()
-		.antMatchers("/myLogin").anonymous()
-			.antMatchers("/*").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER") //oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
+		//.antMatchers("/myLogin").anonymous()
+		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER') and hasIpAddress('127.0.0.1')") //oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
 			
@@ -48,7 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.failureForwardUrl("/noAuthorization.jsp")
 			.successHandler(simpleUrlAuthenticationSuccessHandler())
 		.and()
-			.exceptionHandling().accessDeniedPage("/accessDenied.jsp");
+			.exceptionHandling().accessDeniedPage("/accessDenied.jsp")
+			
+		.and()
+			.requiresChannel()
+				.antMatchers("/welcome")
+			.requiresSecure();
+		
 //		.and()
 //			.logout()
 //			.logoutSuccessHandler(logoutSuccessHandler())
@@ -59,6 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
+		
+		//auth.userDetailsService(new MyUserDetailsService()).passwordEncoder(passwordEncoder());
 	}
 	
 	
