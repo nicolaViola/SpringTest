@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
@@ -45,7 +47,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //					.antMatchers("/welcome")
 //				.requiresSecure();
 		
-		http.csrf().disable();
+	//	http.csrf().disable();
+	}
+	
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler(){
+		return new AccessDeniedHandlerImpl();
 	}
 	
 	//Autenticazione contro un datasource
