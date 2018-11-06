@@ -31,53 +31,33 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-		
 		.authorizeRequests()
-		//.antMatchers("/myLogin").anonymous()
-		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER') and hasIpAddress('127.0.0.1')") //oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
+		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER') and hasIpAddress('127.0.0.1')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
-			
-//			.usernameParameter("username") 
-//			.passwordParameter("password") 
-//			.loginProcessingUrl("/login")
-//		    .loginPage("/myLogin")
-//		    .loginProcessingUrl("/perform_login")
-		    
-			.failureForwardUrl("/noAuthorization.jsp")
-			.successHandler(simpleUrlAuthenticationSuccessHandler())
-		.and()
-			.exceptionHandling().accessDeniedPage("/accessDenied.jsp")
-			
-		.and()
-			.requiresChannel()
-				.antMatchers("/welcome")
-			.requiresSecure();
+					.failureForwardUrl("/noAuthorization.jsp")
+					.successHandler(simpleUrlAuthenticationSuccessHandler())
+				.and()
+					.exceptionHandling().accessDeniedPage("/accessDenied.jsp")
+			.and()
+				.requiresChannel()
+					.antMatchers("/welcome")
+				.requiresSecure();
 		
-//		.and()
-//			.logout()
-//			.logoutSuccessHandler(logoutSuccessHandler())
-//			.logoutSuccessUrl("/");
+		//http.csrf().disable();
 	}
 	
 	//Autenticazione contro un datasource
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
-		
 		//auth.userDetailsService(new MyUserDetailsService()).passwordEncoder(passwordEncoder());
 	}
-	
 	
 	@Bean
 	public AuthenticationSuccessHandler simpleUrlAuthenticationSuccessHandler(){
 		return new SimpleUrlAuthenticationSuccessHandler("/welcome");
 	}
-	
-//	@Bean
-//	public LogoutSuccessHandler logoutSuccessHandler(){
-//		return new SimpleUrlLogoutSuccessHandler();
-//	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder(){
