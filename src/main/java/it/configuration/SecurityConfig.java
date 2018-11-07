@@ -34,14 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
-				//.loginPage("/myLogin").permitAll()
-					.failureForwardUrl("/noAuthorization.jsp")
+				.loginPage("/myLogin").permitAll().failureUrl("/myLogin?error=error")
+				
+					//.failureForwardUrl("/noAuthorization.jsp")
 					.successHandler(simpleUrlAuthenticationSuccessHandler())
 			//	.and().rememberMe()
 				.and()
 					.exceptionHandling().accessDeniedPage("/accessDenied.jsp")
-					
-				.and().logout()//.logoutSuccessUrl("/");//.logoutUrl("/logout");
+				// If CSRF protection is enabled (default), then the request must also be a POST. 	
+				.and()
+					.logout()//.logoutUrl("/myLogout").logoutSuccessUrl("/myLogout?l=l")
 			.and()
 				.requiresChannel()
 					.antMatchers("/welcome")

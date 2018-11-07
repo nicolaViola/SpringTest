@@ -13,6 +13,8 @@
 <table border="1">
 	<tr>
 	 
+	 
+	 
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<td>
 				Welcome admin
@@ -25,11 +27,13 @@
 		</sec:authorize>
 		
 		<td align="right">
+		
 			<%-- <a href="<c:url value="/logout" />">Logout</a> --%>
 			<form name='f' action="/SpringTest/logout" method='POST'>
 				 <td><input name="submit" type="submit" value="submit" /></td>
 				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			 </form>
+			 
 		</td>
 	</tr>
 </table>
