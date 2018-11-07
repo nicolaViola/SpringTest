@@ -31,6 +31,11 @@ public class TrackerController {
 		System.out.println("xsecure!");
 	}
 	
+//	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+//	public void logout(Model model) {
+//		System.out.println("logout!");
+//	}
+	
 	
 	
 	
