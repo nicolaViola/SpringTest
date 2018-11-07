@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.successHandler(simpleUrlAuthenticationSuccessHandler())
 			//	.and().rememberMe()
 				.and()
-					.exceptionHandling().accessDeniedPage("/accessDenied.jsp")
+					.exceptionHandling().accessDeniedPage("/myLogin?error1=error1")
 				// If CSRF protection is enabled (default), then the request must also be a POST. 	
 				.and()
 					.logout()//.logoutUrl("/myLogout").logoutSuccessUrl("/myLogout?l=l")

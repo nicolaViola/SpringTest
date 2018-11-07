@@ -14,6 +14,10 @@
 		<c:if test="${!empty param.error}">
 		    ERRORE - ${param.error} - ${SPRING_SECURITY_LAST_EXCEPTION.message}
 		</c:if>
+		
+		<c:if test="${!empty param.error1}">
+		    ERRORE1 - ${param.error1} 
+		</c:if>
       
      
          <tr>
