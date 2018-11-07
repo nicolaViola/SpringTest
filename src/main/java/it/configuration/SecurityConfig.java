@@ -26,9 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private DataSource dataSource;
 	
-//	@Autowired
-//	private PasswordEncoder encoder;
-
 	//Intercettare una requesr
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -40,8 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.loginPage("/myLogin").permitAll()
 					.failureForwardUrl("/noAuthorization.jsp")
 					.successHandler(simpleUrlAuthenticationSuccessHandler())
+			//	.and().rememberMe()
 				.and()
-					.exceptionHandling().accessDeniedPage("/accessDenied.jsp");
+					.exceptionHandling().accessDeniedPage("/accessDenied.jsp")
+					
+				.and().logout();//.logoutSuccessUrl("/");//.logoutUrl("/logout");
 //			.and()
 //				.requiresChannel()
 //					.antMatchers("/welcome")
