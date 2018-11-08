@@ -43,7 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 					.exceptionHandling().accessDeniedPage("/myLogin?error1=error1")
 				// If CSRF protection is enabled (default), then the request must also be a POST. 	
 				.and()
-					.logout()//.logoutUrl("/myLogout").logoutSuccessUrl("/myLogout?l=l")
+					.logout().logoutSuccessUrl("/myLogout?l=l")//.logoutUrl("/myLogout").logoutSuccessUrl("/myLogout?l=l")
+				.and().rememberMe().tokenValiditySeconds(1000).key("uniqueAndSecret")
 			.and()
 				.requiresChannel()
 					.antMatchers("/welcome")

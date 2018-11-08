@@ -31,6 +31,12 @@
          <tr>
             <td><input name="submit" type="submit" value="submit" /></td>
          </tr>
+         
+         <tr>
+             <td>Remember Me:</td>
+             <td><input type="checkbox" name="remember-me" /></td>
+         </tr>
+         
          <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>	
       </table>
   </form>
