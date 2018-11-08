@@ -26,6 +26,11 @@ public class TrackerController {
 		System.out.println("doSomething!");
 	}
 	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public void admin(Model model) {
+		System.out.println("admin!");
+	}
+	
 	@RequestMapping(value = "/xsecure", method = RequestMethod.GET)
 	public void xsecure(Model model) {
 		System.out.println("xsecure!");

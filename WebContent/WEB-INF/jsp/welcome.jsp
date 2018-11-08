@@ -13,16 +13,36 @@
 <table border="1">
 	<tr>
 	 
-	 
+	 	<td>
+	 	 <sec:authentication property="principal.username"/>
+	 	</td>
+	 	<td>
+	 	 <sec:authentication property="authorities"/>
+	 	</td>
+	 	<td>
+	 	 <sec:authentication property="principal"/>
+	 	</td>
+	 	
+	 	
+	 	<sec:authorize url="/admin">
+
+This content will only be visible to users who are authorized to send requests to the "/admin" URL.
+
+</sec:authorize>
+	 	
+	 	
 	 
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<td>
-				Welcome admin
+				Tu sei un amministrator
+				<form name='ad' action="/SpringTest/admin" method='GET'>
+				 <input name="submit" type="submit" value="admin" />
+				</form>
 			</td>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_USER')">
 			<td>
-				Welcome user
+				Tu sei uno user
 			</td>
 		</sec:authorize>
 		
@@ -30,7 +50,7 @@
 		
 			<%-- <a href="<c:url value="/logout" />">Logout</a> --%>
 			<form name='f' action="/SpringTest/logout" method='POST'>
-				 <td><input name="submit" type="submit" value="submit" /></td>
+				 <input name="submit" type="submit" value="logout" />
 				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			 </form>
 			 

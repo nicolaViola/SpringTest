@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
+		.antMatchers("/admin").access("hasAnyRole('ADMIN')")// vado a mettere l'attributo url sulla pagina jsp
 		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
@@ -44,11 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				// If CSRF protection is enabled (default), then the request must also be a POST. 	
 				.and()
 					.logout().logoutSuccessUrl("/myLogout?l=l")//.logoutUrl("/myLogout").logoutSuccessUrl("/myLogout?l=l")
-				.and().rememberMe().tokenValiditySeconds(1000).key("uniqueAndSecret")
-			.and()
-				.requiresChannel()
-					.antMatchers("/welcome")
-				.requiresSecure();
+				.and().rememberMe().tokenValiditySeconds(1000).key("uniqueAndSecret");
+//			.and()
+//				.requiresChannel()
+//					.antMatchers("/welcome")
+//				.requiresSecure();
 		
 	//	http.csrf().disable(); //default il csrf è abilitato server side
 	}
