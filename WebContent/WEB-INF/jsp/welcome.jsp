@@ -25,10 +25,8 @@
 	 	
 	 	
 	 	<sec:authorize url="/admin">
-
-This content will only be visible to users who are authorized to send requests to the "/admin" URL.
-
-</sec:authorize>
+			This content will only be visible to users who are authorized to send requests to the "/admin" URL.
+		</sec:authorize>
 	 	
 	 	
 	 
@@ -54,6 +52,14 @@ This content will only be visible to users who are authorized to send requests t
 				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 			 </form>
 			 
+		</td>
+	</tr>
+	
+	<tr>
+		<td>
+			<form name='ad' action="/SpringTest/doSomething" method='GET'>
+			 <input name="submit" type="submit" value="solo per user" />
+			</form>
 		</td>
 	</tr>
 </table>

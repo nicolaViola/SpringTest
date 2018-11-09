@@ -1,12 +1,18 @@
 package it.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.servicies.ITrackerService;
+
 @Controller
 public class TrackerController {
+	
+	@Autowired
+	private ITrackerService trackerService;
 	
 //  http://localhost:8081/SpringTest/noAuthorization
 	@RequestMapping(value = "/noAuthorization", method = RequestMethod.GET)
@@ -23,7 +29,15 @@ public class TrackerController {
 //  http://localhost:8081/SpringTest/welcome
 	@RequestMapping(value = "/doSomething", method = RequestMethod.GET)
 	public void doSomething(Model model) {
-		System.out.println("doSomething!");
+		try{
+			System.out.println("doSomething!");
+			trackerService.getDataStream();
+			System.out.println("done!");
+		}catch(Exception e ){
+			System.out.println("eccezione");
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@RequestMapping(value = "/admin", method = RequestMethod.GET)
