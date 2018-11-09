@@ -28,14 +28,16 @@ public class TrackerController {
 	
 //  http://localhost:8081/SpringTest/welcome
 	@RequestMapping(value = "/doSomething", method = RequestMethod.GET)
-	public void doSomething(Model model) {
+	public void doSomething(Model model) throws Exception{
 		try{
 			System.out.println("doSomething!");
 			trackerService.getDataStream();
+			trackerService.getDataStream2();
 			System.out.println("done!");
 		}catch(Exception e ){
 			System.out.println("eccezione");
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}
