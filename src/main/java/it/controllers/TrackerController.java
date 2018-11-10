@@ -34,6 +34,7 @@ public class TrackerController {
 			trackerService.getDataStream();
 			trackerService.getDataStream2();
 			trackerService.getDataStreamPreAuthorize();
+			trackerService.getDataStreamPostAuthorize();
 			System.out.println("done!");
 		}catch(Exception e ){
 			System.out.println("eccezione");

@@ -6,5 +6,6 @@ public interface ITrackerService {
 	public void getDataStream2();
 	
 	public void getDataStreamPreAuthorize();
+	public String getDataStreamPostAuthorize();
 
 }
