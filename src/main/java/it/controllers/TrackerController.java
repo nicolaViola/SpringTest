@@ -1,11 +1,14 @@
 package it.controllers;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import it.model.MyData;
 import it.servicies.ITrackerService;
 
 @Controller
@@ -31,10 +34,21 @@ public class TrackerController {
 	public void doSomething(Model model) throws Exception{
 		try{
 			System.out.println("doSomething!");
-			trackerService.getDataStream();
-			trackerService.getDataStream2();
-			trackerService.getDataStreamPreAuthorize();
-			trackerService.getDataStreamPostAuthorize();
+//			trackerService.getDataStream();
+//			trackerService.getDataStream2();
+//			trackerService.getDataStreamPreAuthorize();
+//			trackerService.getDataStreamPostAuthorize();
+			
+			Collection<MyData> data = trackerService.getMyDataPostFilterd();
+			for(MyData myData : data){
+				System.out.println(myData.getOwner() + " says: " + myData.getComment());
+			}
+			
+			Collection<MyData> filteredData = trackerService.getMyDataPreFileterd(data);
+			for(MyData myData : data){
+				System.out.println(myData.getOwner() + " says: " + myData.getComment());
+			}
+			
 			System.out.println("done!");
 		}catch(Exception e ){
 			System.out.println("eccezione");
