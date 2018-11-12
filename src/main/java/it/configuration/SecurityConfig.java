@@ -32,7 +32,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 		.authorizeRequests()
 		.antMatchers("/admin").access("hasAnyRole('ADMIN')")// vado a mettere l'attributo url sulla pagina jsp
-		.antMatchers("/*").access("hasAnyRole('ADMIN', 'USER')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
+		.mvcMatchers("/welcome").access("hasAnyRole('ADMIN', 'USER')")
+		//.antMatchers("/**").access("hasAnyRole('ADMIN', 'USER')") //.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")////oppure usare hasAnyRole senza ROLE_  hasAnyRole("ADMIN", "USER")
 		.and()
 			.formLogin()
 				.loginPage("/myLogin").permitAll().failureUrl("/myLogin?error=error")
