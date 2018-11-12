@@ -17,7 +17,7 @@ import it.model.MyData;
 import it.servicies.ITrackerService;
 
 @Service
-public class TrackerService implements ITrackerService{
+public class TrackerService extends ITrackerService{
 
 	@Override
 	@RolesAllowed(value={"ROLE_USER"})

@@ -34,10 +34,10 @@ public class TrackerController {
 	public void doSomething(Model model) throws Exception{
 		try{
 			System.out.println("doSomething!");
-//			trackerService.getDataStream();
-//			trackerService.getDataStream2();
-//			trackerService.getDataStreamPreAuthorize();
-//			trackerService.getDataStreamPostAuthorize();
+			trackerService.getDataStream();
+			trackerService.getDataStream2();
+			trackerService.getDataStreamPreAuthorize();
+			trackerService.getDataStreamPostAuthorize();
 			
 			Collection<MyData> data = trackerService.getMyDataPostFilterd();
 			for(MyData myData : data){

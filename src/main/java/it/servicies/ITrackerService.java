@@ -5,14 +5,14 @@ import java.util.List;
 
 import it.model.MyData;
 
-public interface ITrackerService {
+public abstract class ITrackerService {
 	
-	public void getDataStream();
-	public void getDataStream2();
+	abstract public void getDataStream();
+	abstract public void getDataStream2();
 	
-	public void getDataStreamPreAuthorize();
-	public String getDataStreamPostAuthorize();
+	abstract public void getDataStreamPreAuthorize();
+	abstract public String getDataStreamPostAuthorize();
 
-	public Collection<MyData> getMyDataPostFilterd();
-	public Collection<MyData> getMyDataPreFileterd(Collection<MyData> data);
+	abstract public Collection<MyData> getMyDataPostFilterd();
+	abstract public Collection<MyData> getMyDataPreFileterd(Collection<MyData> data);
 }

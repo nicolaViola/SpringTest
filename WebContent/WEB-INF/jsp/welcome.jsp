@@ -5,10 +5,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<sec:csrfMetaTags/>
+
+<script type="text/javascript">
+
+	function ciao(){
+		//var c = $("meta[name='_csrf']").attr("content");
+		//alert("c: " + $("meta[name='_csrf']").attr("content"));
+		alert(_csrf);
+	}
+
+</script>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
-<body>
+<body onload="ciao()">
 
 <table border="1">
 	<tr>
@@ -58,6 +70,7 @@
 	<tr>
 		<td>
 			<form name='ad' action="/SpringTest/doSomething" method='GET'>
+			<sec:csrfInput />
 			 <input name="submit" type="submit" value="solo per user" />
 			</form>
 		</td>
