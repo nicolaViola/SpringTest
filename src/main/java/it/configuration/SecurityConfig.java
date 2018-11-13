@@ -20,7 +20,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 @Configuration
 @EnableWebSecurity
-//@EnableWebMvcSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired

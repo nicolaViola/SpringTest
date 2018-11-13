@@ -19,7 +19,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"it"})
-//@ImportResource("/WEB-INF/configuration/db-config.xml")
 public class WebConfig implements WebMvcConfigurer{
 	
 	@Override
