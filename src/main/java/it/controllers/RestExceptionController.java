@@ -19,7 +19,7 @@ public class RestExceptionController {
 	@ResponseBody
 	public MyError handle(IllegalArgumentException ex){
 		System.out.println("manipolo l'eccezione");
-		return new MyError(HttpStatus.NOT_FOUND, "mio errore");
+		return new MyError("not found", "mio errore");
 	}
 
 }

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.model.MyData;
+import it.model.MyError;
 
 @RestController
 @RequestMapping("/rest")
@@ -71,6 +72,27 @@ public class MyRestController {
 		return new MyData(user, "ciao2 ciao2");
 	}
 	
+	//esempio per far ritornare un formato xmlhttps://howtodoinjava.com/spring-restful/spring-rest-hello-world-xml-example/
+	//curl --header "Accept: application/json" http://localhost:8081/SpringTest/rest/testWithResponseEntity/xxx
+	@RequestMapping(value = "/testWithResponseEntity/{userName}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<MyData> getMyDataWithResponseEntity(@PathVariable("userName") String user){
+		System.out.println("entro");
+		//return new ResponseEntity<MyData>(HttpStatus.CREATED);
+		MyData myData = new MyData(user, "Aggiungo uno stato");
+		ResponseEntity<MyData> responseEntity = new ResponseEntity<MyData>(myData, HttpStatus.OK);
+		
+		return responseEntity;
+	}
+	
+	//esempio per far ritornare un formato xmlhttps://howtodoinjava.com/spring-restful/spring-rest-hello-world-xml-example/
+	//curl --header "Accept: application/json" http://localhost:8081/SpringTest/rest/testWithResponseEntityError/xxx
+	@RequestMapping(value = "/testWithResponseEntityError/{userName}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<?> getMyDataWithResponseEntityError(@PathVariable("userName") String user){
+		System.out.println("entro");
+		ResponseEntity<MyError> responseEntity = new ResponseEntity<MyError>(new MyError("s", "elemento non trovato"), HttpStatus.NOT_FOUND);
+		return responseEntity;
+	}
+	
 	//curl -i -X PUT -H "Content-Type: application/json" "Accept: application/json" -d '{"owner":"xxx","comment":"ciao2 ciao2"}' http://localhost:8081/SpringTest/rest/test2/xxx
 	//invio un json e mi ritorna un xml
 	@RequestMapping(value = "/test2/{userName}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_XML_VALUE})
@@ -110,6 +132,7 @@ public class MyRestController {
 	}
 	
 	
+	//curl --header "Accept: application/json" http://localhost:8081/SpringTest/rest/test3/ss
 	@RequestMapping(value = "/test3/{userName}", method = RequestMethod.GET)
 	public MyData/*ResponseEntity<MyData> */ getMyDataButException(@PathVariable("userName") String user){
 		System.out.println("entro");
@@ -117,11 +140,7 @@ public class MyRestController {
 		throw new IllegalArgumentException("questo è un mio error");
 	}
 	
-	@ResponseStatus(HttpStatus.NOT_FOUND)
-	@ExceptionHandler({IllegalArgumentException.class})
-	public void  handleNotFound(){
-		System.out.println("handleNotFound");
-	}
+	
 	
 	
 	
