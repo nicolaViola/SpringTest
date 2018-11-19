@@ -1,14 +1,21 @@
 package it.configuration;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -31,14 +38,14 @@ public class WebConfig implements WebMvcConfigurer{
 		configurer.enable();
 	}
 	
-	@Bean
-	InternalResourceViewResolver getViewResolver(){	
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/jsp/");
-		resolver.setSuffix(".jsp" );
-		resolver.setRequestContextAttribute("requestContext");
-		return resolver;
-	}
+//	@Bean
+//	InternalResourceViewResolver getViewResolver(){	
+//		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//		resolver.setPrefix("/WEB-INF/jsp/");
+//		resolver.setSuffix(".jsp" );
+//		resolver.setRequestContextAttribute("requestContext");
+//		return resolver;
+//	}
 
 
 	@Bean
@@ -59,7 +66,25 @@ public class WebConfig implements WebMvcConfigurer{
 		return db;
 	}
 	
+//	@Override
+//	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+//		// TODO Auto-generated method stub
+//		//WebMvcConfigurer.super.configureContentNegotiation(configurer);
+//		configurer.defaultContentType(MediaType.APPLICATION_JSON);
+//	}
 	
+//	@Bean
+//	public ContentNegotiationManager contentNegotiationManager(){
+//		ContentNegotiationManager contentNegotiationManager = new ContentNegotiationManager();
+//		contentNegotiationManager.resolveFileExtensions(MediaType.APPLICATION_JSON);
+//		return contentNegotiationManager;
+//	}
+	
+//	@Override
+//	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//		converters.add(new Jaxb2RootElementHttpMessageConverter());
+//		//WebMvcConfigurer.super.configureMessageConverters(converters);
+//	}
 	
 
 }

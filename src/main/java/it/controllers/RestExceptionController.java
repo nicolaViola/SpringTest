@@ -11,14 +11,14 @@ import it.model.MyError;
 
 import org.springframework.http.HttpStatus;
 
-@ControllerAdvice
+//@ControllerAdvice
 public class RestExceptionController {
 	
 	@ExceptionHandler
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	@ResponseBody
 	public MyError handle(IllegalArgumentException ex){
-		System.out.println("handle");
+		System.out.println("manipolo l'eccezione");
 		return new MyError(HttpStatus.NOT_FOUND, "mio errore");
 	}
 
