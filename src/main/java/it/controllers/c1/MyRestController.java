@@ -1,5 +1,6 @@
 package it.controllers.c1;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import it.model.MyData;
 import it.model.MyError;
@@ -96,8 +98,10 @@ public class MyRestController {
 	//curl -i -X PUT -H "Content-Type: application/json" "Accept: application/json" -d '{"owner":"xxx","comment":"ciao2 ciao2"}' http://localhost:8081/SpringTest/rest/test2/xxx
 	//invio un json e mi ritorna un xml
 	@RequestMapping(value = "/test2/{userName}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_XML_VALUE})
-	public MyData updateMyData(@RequestBody MyData myData){
+	public MyData updateMyData(@RequestBody MyData myData, UriComponentsBuilder uriComponentsBuilder){
 		System.out.println("entro");
+		
+		//URI uri = uriComponentsBuilder.path("/rest/testContent/").port(3).build().toUri();
 		//return new ResponseEntity<MyData>(HttpStatus.CREATED);
 		myData.setComment("sono stato modificato");
 		
@@ -109,6 +113,8 @@ public class MyRestController {
 		@RequestMapping(value = "/testX/{userName}", method = RequestMethod.PUT, consumes = {MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 		public MyData updateMyDataFromXml(@RequestBody MyData myData){
 			System.out.println("entro");
+			
+			
 			//return new ResponseEntity<MyData>(HttpStatus.CREATED);
 			myData.setComment("sono stato modificato");
 			

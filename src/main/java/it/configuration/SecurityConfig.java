@@ -20,13 +20,13 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 
 //@Configuration
 //@EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig /* extends WebSecurityConfigurerAdapter*/{
 	
 	@Autowired
 	private DataSource dataSource;
 	
 	//Intercettare una requesr
-	@Override
+	//@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 		.authorizeRequests()
@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	}
 	
 	//Autenticazione contro un datasource
-	@Override
+	//@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(passwordEncoder());
 		//auth.userDetailsService(new MyUserDetailsService()).passwordEncoder(passwordEncoder());

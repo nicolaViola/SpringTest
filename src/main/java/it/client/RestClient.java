@@ -24,7 +24,20 @@ public class RestClient {
 	public static void main(String[] args) {
 		
 		RestTemplate restTemplate = new RestTemplate();
+		String uri = "http://localhost:8081/SpringTest/rest/test2/xxx";
+		
+		MyData data = restTemplate.execute(uri, HttpMethod.GET, new RequestCallback() {
+			
+			@Override
+			public void doWithRequest(ClientHttpRequest request) throws IOException {
+				HttpHeaders header = new HttpHeaders();
+				header.add("Accept", MediaType.APPLICATION_JSON_VALUE);
+				System.out.println("header" + header);
+			}
+		}, new HttpMessageConverterExtractor<MyData>(MyData.class, restTemplate.getMessageConverters()), new HashMap<String, Object>(){{put("owner","xxx");}});
 
+		System.out.println(data.getOwner() + "  " + data.getComment());
+		
 //		String uri = "http://localhost:8081/SpringTest/rest/test/{userName}";
 //		MyData myData = restTemplate.getForObject(uri, MyData.class, "ciccio");
 //		System.out.println(myData.getOwner());
@@ -58,13 +71,13 @@ public class RestClient {
 //		ResponseEntity<MyData> myResponse = restTemplate.exchange(uri, HttpMethod.GET, userRequest, MyData.class, "ww");
 //		System.out.println(myResponse.getBody());
 		
-		String uri = "http://localhost:8081/SpringTest/rest/test3";
-		MyData d = new MyData("zio", "ciao");
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<MyData> userRequest = new HttpEntity<>(d, headers);
-		URI newUri = restTemplate.postForLocation(uri, userRequest,MyData.class);
-		System.out.println(newUri.toString());
+		
+//		MyData d = new MyData("zio", "ciao");
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setContentType(MediaType.APPLICATION_JSON);
+//		HttpEntity<MyData> userRequest = new HttpEntity<>(d, headers);
+//		URI newUri = restTemplate.postForLocation(uri, userRequest,MyData.class);
+//		System.out.println(newUri.toString());
 	}
 	
 }
