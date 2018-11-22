@@ -3,6 +3,7 @@ package resttest;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.HashMap;
 
 import org.junit.Test;
@@ -53,4 +54,30 @@ public class MyTest {
 		MyData mm = result.getBody();
 		System.out.println(mm.getOwner() + "  " + mm.getComment());
 	}
+	
+	@Test
+	public void test_get() {
+		String url = "http://localhost:8081/SpringTest/rest/testObject/xxxx";
+		RestTemplate restTemplate = new RestTemplate();
+		MyData myData = restTemplate.getForObject(url, MyData.class);
+		System.out.println(myData.getOwner() + "  " + myData.getComment());
+	}
+	
+	@Test
+	public void test_post() {
+		String url = "http://localhost:8081/SpringTest/rest/testObject/xxx";
+		RestTemplate restTemplate = new RestTemplate();
+		MyData myData = new MyData("pippo", "franco");
+		
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		HttpEntity<MyData> request = new HttpEntity<>(myData, headers);
+		
+		URI uri = restTemplate.postForLocation(url, request);
+		System.out.println(uri);
+		
+		MyData myDataResult = restTemplate.postForObject(url, request, MyData.class);
+		System.out.println(myDataResult);
+	}
+	
 }

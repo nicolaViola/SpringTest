@@ -20,6 +20,7 @@ public class RestExceptionProcessor {
 	//@ResponseStatus(value = HttpStatus.NOT_FOUND)
 	@ResponseBody
 	public MyData exception(Exception e){
+		e.printStackTrace();
 		return new MyData("nic", e.getMessage());
 	}
 

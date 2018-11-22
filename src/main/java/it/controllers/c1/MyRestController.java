@@ -146,6 +146,30 @@ public class MyRestController {
 		throw new IllegalArgumentException("questo è un mio error");
 	}
 	
+//	//curl --header "Accept: application/json" http://localhost:8081/SpringTest/rest/testObject/xxx
+//	@RequestMapping(value = "/testObject/{userName}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+//	public MyData getMyDataObject(@PathVariable("userName") String user){
+//		System.out.println("entro");
+//		//return new ResponseEntity<MyData>(HttpStatus.CREATED);
+//		MyData myData = new MyData(user, "Aggiungo uno stato");
+//		ResponseEntity<MyData> responseEntity = new ResponseEntity<MyData>(myData, HttpStatus.OK);
+//		
+//		return myData;
+//	}
+	
+	//curl -i -X POST -H "Content-Type: application/json" "Accept: application/json" -d '{"owner":"xxx","comment":"ciao2 ciao2"}' http://localhost:8081/SpringTest/rest/testObject/xxx
+		//invio un json e mi ritorna un xml
+		@RequestMapping(value = "/testObject/{userName}", method = RequestMethod.POST, consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+		public MyData updateMyDataPost(@RequestBody MyData myData){
+			System.out.println("entro");
+			
+			//URI uri = uriComponentsBuilder.path("/rest/testContent/").port(3).build().toUri();
+			//return new ResponseEntity<MyData>(HttpStatus.CREATED);
+			myData.setComment("sono stato modificato");
+			
+			return myData;
+		}
+	
 	
 	
 	
