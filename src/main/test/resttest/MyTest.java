@@ -4,7 +4,9 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -57,11 +59,25 @@ public class MyTest {
 	
 	@Test
 	public void test_get() {
-		String url = "http://localhost:8081/SpringTest/rest/testObject/xxxx";
 		RestTemplate restTemplate = new RestTemplate();
-		MyData myData = restTemplate.getForObject(url, MyData.class);
-		System.out.println(myData.getOwner() + "  " + myData.getComment());
-	}
+		
+		String url = "http://localhost:8081/SpringTest/rest/testObject/{userName}";
+		MyData myData = restTemplate.getForObject(url, MyData.class, "pippo");
+		ResponseEntity<MyData> responseEntity = restTemplate.getForEntity(url, MyData.class, "pippo");
+		
+		Date lastModifiedDate = new Date(responseEntity.getHeaders().getLastModified());
+		List<MediaType> mediaTipies = responseEntity.getHeaders().getAccept();
+		System.out.println(responseEntity.getStatusCode()+ " " + responseEntity.getBody().getOwner() + " " + responseEntity.getBody().getComment());
+
+		
+		URI uri = URI.create("http://localhost:8081/SpringTest/rest/testObject/ciccio");
+		MyData myData2 = restTemplate.getForObject(uri, MyData.class);
+		
+		System.out.println(myData2.getOwner() + "  " + myData2.getComment());
+		
+		
+		
+			}
 	
 	@Test
 	public void test_post() {
@@ -78,6 +94,9 @@ public class MyTest {
 		
 		MyData myDataResult = restTemplate.postForObject(url, request, MyData.class);
 		System.out.println(myDataResult);
+		
+		 restTemplate.put("http://localhost:8081/SpringTest/rest/test2/{userName}", myDataResult, "ecco");
+		 System.out.println(myDataResult);
 	}
 	
 }
