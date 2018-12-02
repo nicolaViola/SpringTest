@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PostFilter;
@@ -18,6 +19,11 @@ import it.servicies.ITrackerService;
 
 @Service
 public class TrackerService extends ITrackerService{
+	
+	public void forTest() {
+		System.out.println("Questo è un test");
+		
+	}
 
 	@Override
 	@RolesAllowed(value={"ROLE_USER"})

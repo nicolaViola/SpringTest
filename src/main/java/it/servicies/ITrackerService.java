@@ -15,4 +15,6 @@ public abstract class ITrackerService {
 
 	abstract public Collection<MyData> getMyDataPostFilterd();
 	abstract public Collection<MyData> getMyDataPreFileterd(Collection<MyData> data);
+	
+	abstract public void forTest();
 }
