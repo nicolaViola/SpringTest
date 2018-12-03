@@ -3,6 +3,7 @@ package it.configuration;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
@@ -34,7 +35,7 @@ public class TestConfiguration {
 	
 	public PlatformTransactionManager transactionManager(){
 		
-		return new JpaTransactionManager();
+		return new DataSourceTransactionManager();
 	}
 	
 	@Bean
