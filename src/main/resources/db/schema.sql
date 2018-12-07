@@ -9,3 +9,9 @@ create table authorities (
 	authority varchar_ignorecase(50) not null,
 	constraint fk_authorities_users foreign key(username) references users(username)
 );
+
+create table test(
+	nome varchar(50),
+	cognome varchar(50),
+	eta integer
+);

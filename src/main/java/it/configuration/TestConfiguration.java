@@ -28,14 +28,15 @@ import org.springframework.context.annotation.*;
 @PropertySource("classpath:property/nicola.properties")
 //@EnableAspectJAutoProxy
 
-@EnableTransactionManagement
+@EnableTransactionManagement(proxyTargetClass=true)
 public class TestConfiguration {
 //	@Autowired
 //	private Figlio figlio;
 	
+	@Bean
 	public PlatformTransactionManager transactionManager(){
 		
-		return new DataSourceTransactionManager();
+		return new DataSourceTransactionManager(dataSource());
 	}
 	
 	@Bean
@@ -43,8 +44,8 @@ public class TestConfiguration {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
 	
-	@Bean("xxx")
-	public DataSource xxx() {
+	@Bean("dataSource")
+	public DataSource dataSource() {
 		
 //		PasswordEncoder bCryptPasswordEncoder = passwordEncoder();
 //		//String p = bCryptPasswordEncoder.encode("admin");
@@ -56,7 +57,7 @@ public class TestConfiguration {
 		EmbeddedDatabase db = builder
 			.setType(EmbeddedDatabaseType.H2) //.H2 or .DERBY
 			.addScripts("classpath:db/schema.sql", 
-						"classpath:db/test-data.sql")
+						"classpath:db/test-data.sql")//;LOCK_MODE=1
 			.build();
 		return db;
 	}
@@ -65,7 +66,7 @@ public class TestConfiguration {
 	@Bean
 	public JdbcTemplate myJdbcTemplate(){
 		
-		return new JdbcTemplate(xxx());
+		return new JdbcTemplate(dataSource());
 		
 	}
 

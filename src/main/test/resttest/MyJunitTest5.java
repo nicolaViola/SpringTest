@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.sql.DataSource;
@@ -31,8 +32,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 
 import it.configuration.TestConfiguration;
+import it.model.TestTable;
 import it.model.User;
 import it.servicies.ITrackerService;
+import it.servicies.ITransactionalService;
 import it.servicies.impl.TrackerService;
 import it.servicies.test.Altro;
 import it.servicies.test.Figlio;
@@ -201,7 +204,20 @@ public class MyJunitTest5 {
 			
 		}
 	}
-
+	
+	@Autowired
+	private ITransactionalService transactionalService;
+	
+	@Test
+	public void testTestServiceSelect(){
+		
+		transactionalService.updateTest(new TestTable("pippo", "baudo", 90));
+		
+		List<TestTable> test = transactionalService.getTestByEta(90);
+		
+		System.out.print(test);
+		
+	}
 }
 
 
