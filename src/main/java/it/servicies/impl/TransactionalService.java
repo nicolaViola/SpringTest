@@ -42,12 +42,45 @@ public class TransactionalService implements ITransactionalService{
 		
 		return result;
 	}
+	
+	
+	@Override
+	public List<TestTable> getTest() {
+		String query = "select nome, cognome, eta from test "	;
+		
+		List<TestTable> result =  jdbcTemplate.query(query, new ResultSetExtractor<List<TestTable>>() {
+
+			@Override
+			public List<TestTable> extractData(ResultSet rs) throws SQLException, DataAccessException {
+				// TODO Auto-generated method stub
+				List<TestTable> tests = new ArrayList<>();
+				while(rs.next())
+					tests.add(new TestTable(rs.getString(1), rs.getString(1), rs.getInt(3)));
+				return tests;
+			}
+		});
+		
+		return result;
+	}
 
 	@Override
-	@Transactional(isolation = Isolation.SERIALIZABLE)
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void updateTest(TestTable test) {
 		jdbcTemplate.execute("insert into test values ('"+test.getNome()+"', '"+test.getCognome()+"', "+test.getEta()+")");
+		
+		
+	    updateTest2(new TestTable("pippo2", "baudo2", 92));
 		System.out.println("no commit yet");
 	}
+
+//	@Override
+	@Transactional(propagation = Propagation.NEVER)
+	protected void updateTest2(TestTable test) {
+		jdbcTemplate.execute("insert into test values ('"+test.getNome()+"', '"+test.getCognome()+"', "+test.getEta()+")");
+		System.out.println("no commit2 yet");
+		
+	}
+
+	
 
 }

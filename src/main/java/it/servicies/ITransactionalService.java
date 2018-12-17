@@ -8,6 +8,10 @@ public interface ITransactionalService {
 	
 	public List<TestTable> getTestByEta(int eta);
 	
+	public List<TestTable> getTest();
+	
 	public void updateTest(TestTable test);
+	
+//	public void updateTest2(TestTable test);
 
 }
