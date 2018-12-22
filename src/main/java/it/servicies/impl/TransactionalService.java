@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import it.model.TestTable;
 import it.servicies.ITransactionalService;
 
-@Service
+//@Service
 public class TransactionalService implements ITransactionalService{
 	
 	@Autowired

@@ -15,3 +15,8 @@ create table test(
 	cognome varchar(50),
 	eta integer
 );
+create table Elemento(
+	id integer not null primary key,
+	nome varchar(50),
+);
+
